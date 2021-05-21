@@ -7,7 +7,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
 import getpass
 
-sched = BlockingScheduler()
+
 print("This data is used automatically passed to Discord. Nothing is stored. \n"
       "Actually, check the source code, lol\n")
 
@@ -16,8 +16,9 @@ print("I'm not validating your dumb credentials because it's too much work. "
 
 USERNAME = input("Discord E-mail: ")
 PASSWORD = input("Discord Password: ")
+SERVER = "" # Copy and paste the discord channel URL where you want to roll here
 
-
+sched = BlockingScheduler()
 @sched.scheduled_job('interval', minutes=120, next_run_time=datetime.now())
 def timed_job():
     options = Options()
@@ -27,7 +28,7 @@ def timed_job():
     options.add_argument("--log-level=3")
     options.add_argument("--mute-audio")
     driver = webdriver.Chrome(options=options)
-    driver.get('https://discord.com/channels/838636328220491796/840441553705107497')
+    driver.get(SERVER)
 
     print("\nLogging to Discord with your dumb credentials...")
 
